@@ -195,17 +195,3 @@ npm run dev
   },
   "disclaimer": "This is an experimental educational project, not a clinical diagnostic tool."
 }
-```
-
----
-
-## 8. College Demonstration Guide (Viva Talking Points)
-
-1. **Why EfficientNetV2-S?**
-   - EfficientNetV2-S utilizes progressive training and fused MBConv layers to achieve strong feature representation with fewer parameters (~21M parameters) and faster CPU inference than heavier ResNet or DenseNet architectures.
-2. **Why Threshold 0.77 instead of 0.5?**
-   - A standard 0.50 argmax threshold produces high false-positive rates due to class distribution and non-pathological radiographic variance. Operating threshold 0.77 was selected on validation data to maximize specificity (reaching 98.94%) while maintaining sensitivity of at least 98% (98.21%). On the held-out test set at this threshold, the model achieved 98.97% sensitivity, 69.66% specificity, 87.98% accuracy, 84.46% precision, 91.15% F1-score, and 96.64% ROC-AUC.
-3. **What Does Grad-CAM on `features[5]` Show?**
-   - `model.features[5]` is the final major convolutional feature block prior to global spatial pooling. Grad-CAM backpropagates the target class score into this layer to visualize the spatial regions that positively influenced the prediction. **Viva note**: Be clear that Grad-CAM is an interpretability technique, not a clinically validated pathological localization method.
-4. **Binary Scope:**
-   - The model is trained strictly for binary classification (NORMAL = 0, PNEUMONIA = 1) and does not distinguish between viral and bacterial pneumonia etiologies.
